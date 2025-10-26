@@ -1,0 +1,67 @@
+@startuml
+
+' Varlıklar (Entities)
+
+
+entity "Customer" as Customer {
+  * id : Long
+  --
+  * name : String
+  * phone : String
+  * mail : String
+  * address : String
+  * city : String
+}
+
+entity "Animal" as Animal {
+  * id : Long
+  --
+  * name : String
+  * species : String
+  * breed : String
+  * gender : String
+  * colour : String
+  * dateOfBirth : LocalDate
+}
+
+entity "Doctor" as Doctor {
+  * id : Long
+  --
+  * name : String
+  * phone : String
+  * mail : String
+  * address : String
+  * city : String
+}
+
+entity "Appointment" as Appointment {
+  * id : Long
+  --
+  * appointmentDate : LocalDateTime
+}
+
+entity "AvailableDate" as AvailableDate {
+  * id : Long
+  --
+  * availableDate : LocalDate
+}
+
+entity "Vaccine" as Vaccine {
+  * id : Long
+  --
+  * name : String
+  * code : String
+  * protectionStartDate : LocalDate
+  * protectionFinishDate : LocalDate
+}
+
+
+' İlişkiler (Relationships)
+
+Customer ||--o{ Animal : "owns"
+Animal ||--o{ Vaccine : "has"
+Animal ||--o{ Appointment : "has"
+Doctor ||--o{ Appointment : "schedules"
+Doctor ||--o{ AvailableDate : "is available on"
+
+@enduml

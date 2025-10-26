@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "animals")
 @Data
@@ -43,15 +46,18 @@ public class Animal {
     // Her hayvan bir müşteriye aittir.
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
+    @JsonBackReference
     private Customer customer;
 
     // Bir hayvanın birden fazla aşısı olabilir.
     // Hayvan silinirse, aşı kayıtları da silinir.
     @OneToMany(mappedBy = "animal", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference 
     private List<Vaccine> vaccineList;
 
     // Bir hayvanın birden fazla randevusu olabilir.
     // Hayvan silinirse, randevu kayıtları da silinir.
     @OneToMany(mappedBy = "animal", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference 
     private List<Appointment> appointmentList;
 }

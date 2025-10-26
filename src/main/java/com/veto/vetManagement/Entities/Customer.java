@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "customers")
 @Data
@@ -38,5 +40,6 @@ public class Customer {
     // Bir müşterinin birden fazla hayvanı olabilir.
     // Müşteri silinirse, ona ait tüm hayvanlar da veritabanından silinir.
     @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Animal> animalList;
 }

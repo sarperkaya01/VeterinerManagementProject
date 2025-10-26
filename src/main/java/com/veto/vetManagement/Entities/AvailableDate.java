@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "available_dates")
 @Data
@@ -27,5 +29,6 @@ public class AvailableDate {
     // Her müsait gün bir doktora aittir.
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "doctor_id", referencedColumnName = "id", nullable = false)
+    @JsonBackReference
     private Doctor doctor;
 }

@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "vaccines")
 @Data
@@ -37,5 +39,6 @@ public class Vaccine {
     // Her aşı bir hayvana aittir.
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "animal_id", referencedColumnName = "id", nullable = false)
+    @JsonBackReference
     private Animal animal;
 }
